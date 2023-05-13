@@ -19,5 +19,6 @@ public class ProdutoEntity {
     private String descricao;
     private Double valor;
     private Integer quantidade;
+    private Boolean promocao;
 
 }

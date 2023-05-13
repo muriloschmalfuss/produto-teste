@@ -13,5 +13,6 @@ public class Produto {
     private String descricao;
     private Long id;
     private Double valor;
+    private Boolean promocao;
 
 }

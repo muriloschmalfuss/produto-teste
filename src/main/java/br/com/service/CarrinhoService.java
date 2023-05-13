@@ -1,6 +1,7 @@
 package br.com.service;
 
 import br.com.domain.Carrinho;
+import br.com.exception.PromocaoException;
 import br.com.model.entity.ProdutoEntity;
 import br.com.repository.CarrinhoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,9 @@ public class CarrinhoService {
             ProdutoEntity produto = repository.findById(idProduto).get();
             if (qtdCompra > produto.getQuantidade()){
                 throw new RuntimeException("Quantidade em estoque insuficiente");
-            }else {
+            } else if (produto.getPromocao() && qtdCompra > 3) {
+                throw new PromocaoException("Produto em promoção só pode 3 unidades");
+            } else {
                 produto.setQuantidade(produto.getQuantidade() - qtdCompra);
                 repository.save(produto);
             }
